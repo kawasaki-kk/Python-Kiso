@@ -25,14 +25,27 @@
 # Sample Output
 # 2
 
-count=0
-n,x=map( int,input().split() )
+result = []
+n=[]
+x=[]
 
-for n1 in range(1,n+1-2):
-	for n2 in range(n1+1, n+1-1):
-		for n3 in range(n2+1, n+1):
-			sum = n1+n2+n3
-			if sum == x:
-				count+=1
+while 1:
+	temp = input().split() 
+	if temp[0]=="0" and temp[1]=="0":
+		break;
+	else:
+		n.append( int( temp[0] ))
+		x.append( int( temp[1] ))
 
-print(count)
+for i in range( len(n) ):
+	count =0
+	for n1 in range(1,n[i]+1-2):
+		for n2 in range(n1+1, n[i]+1-1):
+			for n3 in range(n2+1, n[i]+1):
+				sum = n1+n2+n3
+				if sum == x[i]:
+					count+=1
+	result.append(count)
+
+for i in range( len(result) ):
+	print(result[i])
