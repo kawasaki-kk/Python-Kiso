@@ -35,6 +35,13 @@ latitude  = "35.670083"
 longitude = "139.763267"
 # 範囲
 range     = "1"
+
+####
+# キーワード入力
+####
+# print("検索キーワードを入力してください。")
+# keyword = input()
+
  
 ####
 # APIアクセス
@@ -45,7 +52,9 @@ query = [
   ( "keyid",     keyid     ),
   ( "latitude",  latitude  ),
   ( "longitude", longitude ),
-  ( "range",     range     )
+  ( "range",     range     ),
+  # ( "name", 		"東京"),
+  ( "name", 		"ひつじや"),
 ]
 # URL生成
 url += "?{0}".format( urllib.parse.urlencode( query ) )
@@ -88,9 +97,15 @@ if not "rest" in data :
 print("{0}件ヒットしました。".format( total_hit_count ))
 print("----")
  
+#ヒット件数が1件だった場合の処理
+if total_hit_count == 1:
+	data["rest"] = [data["rest"]]
+
+# print("data[rest]",data["rest"])
+
 # 出力件数
 disp_count = 0
- 
+
 # レストランデータ取得
 for rest in data["rest"] :
   line                 = []
@@ -100,6 +115,9 @@ for rest in data["rest"] :
   access_station       = ""
   access_walk          = ""
   code_category_name_s = []
+  
+  # print("rest:",rest)
+
   # 店舗番号
   if "id" in rest and is_str( rest["id"] ) :
     id = rest["id"]
